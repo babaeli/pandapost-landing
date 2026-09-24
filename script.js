@@ -185,3 +185,138 @@ window.addEventListener('load', () => {
         }
     });
 });
+
+
+// Demo Modal Functionality
+const demoModal = document.getElementById('demoModal');
+const modalOverlay = document.getElementById('modalOverlay');
+const modalClose = document.getElementById('modalClose');
+const demoForm = document.getElementById('demoForm');
+const formSuccess = document.getElementById('formSuccess');
+const closeSuccess = document.getElementById('closeSuccess');
+
+// Get all "Book a Demo" buttons
+const demoButtons = document.querySelectorAll('a[href="/demo"]');
+
+// Open modal when any "Book a Demo" button is clicked
+demoButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+    });
+});
+
+// Open modal function
+function openModal() {
+    demoModal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+// Close modal function
+function closeModal() {
+    demoModal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+    
+    // Reset form after a delay
+    setTimeout(() => {
+        demoForm.reset();
+        demoForm.style.display = 'flex';
+        formSuccess.style.display = 'none';
+    }, 300);
+}
+
+// Close modal on overlay click
+modalOverlay.addEventListener('click', closeModal);
+
+// Close modal on X button click
+modalClose.addEventListener('click', closeModal);
+
+// Close modal on success button click
+if (closeSuccess) {
+    closeSuccess.addEventListener('click', closeModal);
+}
+
+// Close modal on ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && demoModal.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Handle form submission
+demoForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const submitButton = demoForm.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+    
+    // Show loading state
+    submitButton.textContent = 'Sending...';
+    submitButton.disabled = true;
+    
+    try {
+        const formData = new FormData(demoForm);
+        const response = await fetch(demoForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            // Show success message
+            demoForm.style.display = 'none';
+            formSuccess.style.display = 'block';
+            
+            // Log success for analytics
+            console.log('Demo request submitted successfully', {
+                email: formData.get('email'),
+                timestamp: new Date().toISOString()
+            });
+            
+            // Optional: Send to Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'demo_request', {
+                    method: 'form_submission'
+                });
+            }
+        } else {
+            throw new Error('Form submission failed');
+        }
+    } catch (error) {
+        alert('Oops! There was a problem submitting your request. Please try again or email us directly at flynnduerrel@gmail.com');
+        console.error('Form submission error:', error);
+    } finally {
+        // Restore button state
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+    }
+});
+
+// Check if redirected back after successful submission
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('success') === 'true') {
+    openModal();
+    demoForm.style.display = 'none';
+    formSuccess.style.display = 'block';
+    
+    // Clean up URL
+    window.history.replaceState({}, document.title, window.location.pathname);
+}
+
+// Form field validation feedback
+const formInputs = document.querySelectorAll('.demo-form input, .demo-form textarea');
+formInputs.forEach(input => {
+    input.addEventListener('blur', () => {
+        if (input.hasAttribute('required') && !input.value.trim()) {
+            input.style.borderColor = '#EF4444';
+        } else if (input.value.trim()) {
+            input.style.borderColor = '#10B981';
+        }
+    });
+    
+    input.addEventListener('focus', () => {
+        input.style.borderColor = '#FF4B3E';
+    });
+});

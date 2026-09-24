@@ -403,6 +403,57 @@
         </div>
     </footer>
 
+    <!-- Demo Request Modal -->
+    <div class="modal" id="demoModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <h2>Book Your Demo</h2>
+                <p>Fill out the form below and we'll get in touch shortly to schedule your personalized demo.</p>
+            </div>
+            <form class="demo-form" id="demoForm" action="https://formspree.io/f/xanyrvve" method="POST">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="John Doe">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="john@company.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company" placeholder="Your Company">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Tell us about your needs (optional)</label>
+                    <textarea id="message" name="message" rows="4" placeholder="What would you like to see in the demo?"></textarea>
+                </div>
+                
+                <input type="hidden" name="_subject" value="New Demo Request from PandaPost Landing Page">
+                <input type="hidden" name="_next" value="https://babaeli.github.io/pandapost-landing/?success=true">
+                
+                <button type="submit" class="btn btn-primary btn-large btn-full">Request Demo</button>
+                <p class="form-note">We'll respond within 24 hours</p>
+            </form>
+            
+            <div class="form-success" id="formSuccess" style="display: none;">
+                <div class="success-icon">✓</div>
+                <h3>Thank You!</h3>
+                <p>We've received your demo request. We'll be in touch within 24 hours to schedule your personalized demo.</p>
+                <button class="btn btn-primary" id="closeSuccess">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
