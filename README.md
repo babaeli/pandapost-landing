@@ -9,6 +9,8 @@ A modern, conversion-focused landing page for PandaPost - a social media managem
 
 **[View Live Site →](https://babaeli.github.io/pandapost-landing/)**
 
+Hosted on GitHub Pages.
+
 ## Overview
 
 This landing page is designed to convert visitors into demo bookings and sign-ups. It features a clean, professional design that balances friendliness with credibility.
