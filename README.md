@@ -1,15 +1,13 @@
 # PandaPost Landing Page
 
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://babaeli.github.io/pandapost-landing/)
-[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue)](https://babaeli.github.io/pandapost-landing/)
-
 A modern, conversion-focused landing page for PandaPost - a social media management platform.
 
-## 🌐 Live Demo
+## 🌐 Features
 
-**[View Live Site →](https://babaeli.github.io/pandapost-landing/)**
-
-Hosted on GitHub Pages.
+- Conversion-optimized design with strategic CTAs
+- Fully responsive across all devices
+- Demo request form with email notifications
+- Modern, professional aesthetic
 
 ## Overview
 

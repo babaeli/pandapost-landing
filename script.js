@@ -285,7 +285,7 @@ demoForm.addEventListener('submit', async (e) => {
             throw new Error('Form submission failed');
         }
     } catch (error) {
-        alert('Oops! There was a problem submitting your request. Please try again or email us directly at flynnduerrel@gmail.com');
+        alert('Oops! There was a problem submitting your request. Please try again or contact us directly.');
         console.error('Form submission error:', error);
     } finally {
         // Restore button state
